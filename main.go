@@ -3,6 +3,7 @@ package main
 //go:generate pkger
 
 import (
+	"com.jessegrabowski/go-webapp/business/sampling"
 	"com.jessegrabowski/go-webapp/config"
 	"com.jessegrabowski/go-webapp/database"
 	"com.jessegrabowski/go-webapp/server"
@@ -28,6 +29,9 @@ func main() {
 	}
 
 	config.Init(validate, opts.ConfigLocations, opts.Profiles)
+
 	database.Init()
+	sampling.Init(database.Dao)
+
 	server.Start(opts.Port)
 }

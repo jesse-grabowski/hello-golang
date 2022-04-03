@@ -1,6 +1,7 @@
 package database
 
 import (
+	"com.jessegrabowski/go-webapp/business/sampling"
 	"com.jessegrabowski/go-webapp/config"
 	"fmt"
 	"strings"
@@ -14,6 +15,7 @@ var databaseConfig struct {
 type dao interface {
 	init(connectionString string) error
 	migrate(connectionString string) error
+	sampling.Dao
 }
 
 var Dao dao
@@ -23,7 +25,7 @@ func Init() {
 
 	switch databaseConfig.ConnectionString[:strings.Index(databaseConfig.ConnectionString, ":")] {
 	case "postgres":
-		Dao = Postgres{}
+		Dao = postgres{}
 	default:
 		panic("no valid database definition found \n")
 	}
