@@ -15,3 +15,13 @@ Generate pkger data (embedded files like application.yml)
 Run application using port 8080 and local profile
 
     go run . /port 8080 /profile local
+
+## Docker
+
+Build container image
+
+    docker build -t test-go-build . 
+
+Run container image
+
+    docker run -p 8080:8080 test-go-build -p 8080 -P local -l /go/bin/
